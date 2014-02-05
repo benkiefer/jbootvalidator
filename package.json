@@ -11,5 +11,8 @@
     "validation"
   ],
   "author": "benkiefer",
-  "license": "BSD"
+  "license": "BSD",
+  "devDependencies": {
+    "grunt": "~0.4.2"
+  }
 }
