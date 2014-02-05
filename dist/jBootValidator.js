@@ -1,7 +1,7 @@
 (function ($) {
     $.fn.jBootValidator = function () {
-        return this.bind('keyup', function (e) {
-			console.log('you did it');
+        return this.find('input.form-control').bind('keyup', function (e) {
+			$(this).val('working');
         });
     };
 }(jQuery));

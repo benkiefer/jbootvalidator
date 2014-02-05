@@ -1,9 +1,24 @@
-describe("A suite is just a function", function() {
-  var a;
+describe("A suite is just a function", function () {
+    var form;
 
-  it("and so is a spec", function() {
-    a = true;
+    beforeEach(function () {
+        form = $('<form>');
+        $(document.body).append(form);
+    });
 
-    expect(a).toBe(true);
-  });
+    it('should update input value on keyup', function () {
+        var $input = $('<input>');
+        $input.addClass('form-control');
+        form.append($input)
+        form.jBootValidator();
+
+        $input.trigger('keyup');
+
+        expect($input.val()).toBe('working');
+    });
+
+    afterEach(function () {
+        form.remove();
+        form = null;
+    });
 });
