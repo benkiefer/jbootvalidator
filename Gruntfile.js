@@ -13,6 +13,16 @@ module.exports = function (grunt) {
                 src: ['build', 'dist']
             }
         },
+        karma: {
+            options: {
+                configFile: 'karma.conf.js',
+                singleRun: true
+            },
+            continuous: {
+                singleRun: true,
+                browsers: ['PhantomJS']
+            }
+        },
         copy: {
             minifiedJs: {
                 cwd: 'build/js/',
@@ -31,9 +41,10 @@ module.exports = function (grunt) {
         }
     });
 
+    grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-copy');
 
-    grunt.registerTask('default', ['clean','uglify','copy']);
+    grunt.registerTask('default', ['clean', 'karma:continuous', 'uglify', 'copy']);
 };
