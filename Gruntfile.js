@@ -38,6 +38,9 @@ module.exports = function (grunt) {
                 flatten: true,
                 expand: true
             }
+        },
+        jshint: {
+            all: ['Gruntfile.js', 'src/**/*.js', 'test/**/*.js']
         }
     });
 
@@ -45,6 +48,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
 
-    grunt.registerTask('default', ['clean', 'karma:continuous', 'uglify', 'copy']);
+    grunt.registerTask('default', ['clean', 'jshint', 'karma:continuous', 'uglify', 'copy']);
 };
