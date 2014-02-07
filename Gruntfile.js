@@ -1,4 +1,12 @@
 module.exports = function (grunt) {
+    'use strict';
+
+    grunt.loadNpmTasks('grunt-karma');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
+
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         uglify: {
@@ -43,12 +51,6 @@ module.exports = function (grunt) {
             all: ['Gruntfile.js', 'src/**/*.js', 'test/**/*.js']
         }
     });
-
-    grunt.loadNpmTasks('grunt-karma');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-clean');
-    grunt.loadNpmTasks('grunt-contrib-copy');
-    grunt.loadNpmTasks('grunt-contrib-jshint');
 
     grunt.registerTask('default', ['clean', 'jshint', 'karma:continuous', 'uglify', 'copy']);
 };
