@@ -7,12 +7,12 @@ describe('jbootvalidator(required)', function () {
     });
 
     it('should add has-error class when required input is blank', function () {
-        var formGroup = formGroupDiv();
         var formControl = formControlInput(true);
-        formGroup.append(formControl);
-        form.append(formGroup);
+        var formGroup = formGroupDiv()
+            .append(formControl);
 
-        form.jBootValidator();
+        form.append(formGroup)
+            .jBootValidator();
 
         formControl.trigger('keyup');
 
@@ -25,9 +25,8 @@ describe('jbootvalidator(required)', function () {
         var formGroup = formGroupDiv()
             .append(formControl);
 
-        form.append(formGroup);
-
-        form.jBootValidator();
+        form.append(formGroup)
+            .jBootValidator();
 
         formControl.trigger('keyup');
 
@@ -35,12 +34,12 @@ describe('jbootvalidator(required)', function () {
     });
 
     it('should add help-block after form control when required input is blank', function () {
-        var formGroup = formGroupDiv();
         var formControl = formControlInput(true);
-        formGroup.append(formControl);
-        form.append(formGroup);
+        var formGroup = formGroupDiv()
+            .append(formControl);
 
-        form.jBootValidator();
+        form.append(formGroup)
+            .jBootValidator();
 
         formControl.trigger('keyup');
 
@@ -56,9 +55,8 @@ describe('jbootvalidator(required)', function () {
         var formGroup = formGroupDiv()
             .append(colWidthDiv);
 
-        form.append(formGroup);
-
-        form.jBootValidator();
+        form.append(formGroup)
+            .jBootValidator();
 
         formControl.trigger('keyup');
 
@@ -78,9 +76,8 @@ describe('jbootvalidator(required)', function () {
         var formGroup = formGroupDiv()
             .append(colWidthDiv);
 
-        form.append(formGroup);
-
-        form.jBootValidator();
+        form.append(formGroup)
+            .jBootValidator();
 
         formControl.trigger('keyup');
 
@@ -98,9 +95,8 @@ describe('jbootvalidator(required)', function () {
         var formGroup = formGroupDiv()
             .append(colWidthDiv);
 
-        form.append(formGroup);
-
-        form.jBootValidator();
+        form.append(formGroup)
+            .jBootValidator();
 
         formControl.trigger('keyup');
 
@@ -120,9 +116,8 @@ describe('jbootvalidator(required)', function () {
             .addClass('has-error')
             .append(colWidthDiv);
 
-        form.append(formGroup);
-
-        form.jBootValidator();
+        form.append(formGroup)
+            .jBootValidator();
 
         formControl.trigger('keyup');
 
