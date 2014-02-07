@@ -6,10 +6,10 @@
 
 			if($input.attr('required')){
                 if (val == null || val.trim() == ''){
-                    $input.after('<span class="help-block">This field is required.</span>')
+                    $input.after('<span class="help-block jbootval">This field is required.</span>')
                         .parent('.form-group').addClass('has-error')
                 } else {
-                    $input.closest('.form-group').removeClass('has-error').find('span.help-block').remove();
+                    $input.closest('.form-group').removeClass('has-error').find('span.help-block.jbootval').remove();
                 }
             }
         });

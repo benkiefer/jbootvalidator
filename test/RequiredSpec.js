@@ -44,7 +44,7 @@ describe('jbootvalidator(required)', function () {
 
         formControl.trigger('keyup');
 
-        var $span = formGroup.find('span.help-block');
+        var $span = formGroup.find('span.help-block.jbootval');
         expect($span.text()).toBe('This field is required.');
     });
 
@@ -62,9 +62,9 @@ describe('jbootvalidator(required)', function () {
 
         formControl.trigger('keyup');
 
-        expect(formGroup.children('span.help-block').length).toBe(0);
+        expect(formGroup.children('span.help-block.jbootval').length).toBe(0);
 
-        var $span = colWidthDiv.find('span.help-block');
+        var $span = colWidthDiv.find('span.help-block.jbootval');
         expect($span.text()).toBe('This field is required.');
     });
 
@@ -84,7 +84,28 @@ describe('jbootvalidator(required)', function () {
 
         formControl.trigger('keyup');
 
-        expect(formGroup.find('span.help-block').length).toBe(0);
+        expect(formGroup.find('span.help-block.jbootval').length).toBe(0);
+    });
+
+    it('should not remove non jbootval help-blocks when the required issue is resolved', function () {
+        var formControl = formControlInput(true).val('present');
+
+        var colWidthDiv = $('<div>')
+            .append(formControl)
+            .append($('<span>').addClass('help-block').text('testing'))
+            .append(helpBlockSpan());
+
+        var formGroup = formGroupDiv()
+            .append(colWidthDiv);
+
+        form.append(formGroup);
+
+        form.jBootValidator();
+
+        formControl.trigger('keyup');
+
+        expect(formGroup.find('span.help-block.jbootval').length).toBe(0);
+        expect(formGroup.find('span.help-block').length).toBe(1);
     });
 
     it('should remove has-error when the required issue is resolved', function () {
@@ -121,7 +142,7 @@ describe('jbootvalidator(required)', function () {
     }
 
     function helpBlockSpan() {
-        return $('<span>').addClass('help-block');
+        return $('<span>').addClass('help-block.jbootval');
     }
 
     afterEach(function () {
