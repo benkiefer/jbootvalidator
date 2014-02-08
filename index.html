@@ -53,6 +53,18 @@
                         </div>
 
                     </div>
+                    <div class="form-group">
+                        <label for="status" class="col-xs-4 control-label">Status</label>
+
+                        <div class="col-xs-8 col-sm-4">
+                            <select id="status" name="status"
+                                    class="form-control" required="">
+                                <option disabled="disabled" selected="selected" value="">Select</option>
+                                <option value="Living">Living</option>
+                                <option value="Deceased">Deceased</option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="form-actions">
                         <div class="col-xs-offset-4 col-xs-8">
                             <button type="submit" class="btn btn-primary btn-lg">Submit</button>
@@ -66,7 +78,7 @@
 <script>
     $('form').submit(function (e) {
         e.preventDefault();
-        $(this).find('input.form-control').trigger('keyup');
+        $(this).find('.form-control').trigger('focus');
         if ($(this).find('.form-group.has-error').length > 0) {
             $('#error').show();
             $('#victory').hide();
