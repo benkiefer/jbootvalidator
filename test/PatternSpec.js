@@ -2,6 +2,7 @@ describe('jbootvalidator(pattern)', function () {
     var form;
 
     beforeEach(function () {
+        this.clock = sinon.useFakeTimers();
         form = $('<form>');
         $(document.body).append(form);
     });
@@ -16,6 +17,7 @@ describe('jbootvalidator(pattern)', function () {
             .jBootValidator();
 
         formControl.trigger('keyup');
+        this.clock.tick(301);
 
         expect(formGroup.hasClass('has-error')).toBe(true);
     });
@@ -30,6 +32,7 @@ describe('jbootvalidator(pattern)', function () {
             .jBootValidator();
 
         formControl.trigger('focus');
+        this.clock.tick(301);
 
         expect(formGroup.hasClass('has-error')).toBe(true);
     });
@@ -43,6 +46,7 @@ describe('jbootvalidator(pattern)', function () {
             .jBootValidator();
 
         formControl.trigger('keyup');
+        this.clock.tick(301);
 
         var $span = formGroup.find('span.help-block.jbootval');
         expect($span.text()).toBe('my title');
@@ -57,6 +61,7 @@ describe('jbootvalidator(pattern)', function () {
             .jBootValidator();
 
         formControl.trigger('keyup');
+        this.clock.tick(301);
 
         var $span = formGroup.find('span.help-block.jbootval');
         expect($span.text()).toBe('This field is invalid.');
@@ -71,6 +76,7 @@ describe('jbootvalidator(pattern)', function () {
             .jBootValidator();
 
         formControl.trigger('keyup');
+        this.clock.tick(301);
 
         var $span = formGroup.find('span.help-block.jbootval');
         expect($span.text()).toBe('This field is invalid.');
@@ -85,7 +91,9 @@ describe('jbootvalidator(pattern)', function () {
             .jBootValidator();
 
         formControl.trigger('keyup');
+        this.clock.tick(301);
         formControl.trigger('keyup');
+        this.clock.tick(301);
 
         var $span = formGroup.find('span.help-block.jbootval');
         expect($span.length).toBe(1);
@@ -103,6 +111,7 @@ describe('jbootvalidator(pattern)', function () {
             .jBootValidator();
 
         formControl.trigger('keyup');
+        this.clock.tick(301);
 
         expect(formGroup.children('span.help-block.jbootval').length).toBe(0);
 
@@ -122,6 +131,7 @@ describe('jbootvalidator(pattern)', function () {
             .jBootValidator();
 
         formControl.trigger('keyup');
+        this.clock.tick(301);
 
         expect(formGroup.children('span.help-block.jbootval').length).toBe(0);
 
@@ -143,6 +153,7 @@ describe('jbootvalidator(pattern)', function () {
             .jBootValidator();
 
         formControl.trigger('keyup');
+        this.clock.tick(301);
 
         expect(formGroup.find('span.help-block.jbootval').length).toBe(0);
     });
@@ -162,6 +173,7 @@ describe('jbootvalidator(pattern)', function () {
             .jBootValidator();
 
         formControl.trigger('keyup');
+        this.clock.tick(301);
 
         expect(formGroup.find('span.help-block.jbootval').length).toBe(0);
         expect(formGroup.find('span.help-block').length).toBe(1);
@@ -182,6 +194,7 @@ describe('jbootvalidator(pattern)', function () {
             .jBootValidator();
 
         formControl.trigger('keyup');
+        this.clock.tick(301);
 
         expect(formGroup.hasClass('has-error')).toBe(false);
     });
@@ -203,6 +216,7 @@ describe('jbootvalidator(pattern)', function () {
     }
 
     afterEach(function () {
+        this.clock.restore();
         form.remove();
         form = null;
     });

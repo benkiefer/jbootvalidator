@@ -2,6 +2,7 @@ describe('jbootvalidator', function () {
     var form;
 
     beforeEach(function () {
+        this.clock = sinon.useFakeTimers();
         form = $('<form>');
         $(document.body).append(form);
     });
@@ -16,6 +17,7 @@ describe('jbootvalidator', function () {
             .jBootValidator();
 
         formControl.trigger('keyup');
+        this.clock.tick(301);
 
         expect(formGroup.hasClass('has-error')).toBe(false);
         expect(form.find('span.help-block.jbootval').length).toBe(0);
@@ -31,6 +33,7 @@ describe('jbootvalidator', function () {
             .jBootValidator();
 
         formControl.trigger('focus');
+        this.clock.tick(301);
 
         expect(formGroup.hasClass('has-error')).toBe(false);
         expect(form.find('span.help-block.jbootval').length).toBe(0);
@@ -45,6 +48,7 @@ describe('jbootvalidator', function () {
     }
 
     afterEach(function () {
+        this.clock.restore();
         form.remove();
         form = null;
     });

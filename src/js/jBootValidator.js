@@ -38,7 +38,7 @@
 
         return this.attr('novalidate', 'novalidate')
             .find('.form-control')
-            .bind('keyup focus change', function (e) {
+            .bind('keyup focus change', $.debounce(function (e) {
                 var $input = $(this),
                     $formGroup = $input.closest('.form-group'),
                     val = $input.val(),
@@ -65,7 +65,7 @@
                         $formGroup.removeClass('has-error').find('span.help-block.jbootval').remove();
                     }
                 }
-            }
+            }, 300)
         );
     };
 }(jQuery));
