@@ -6,6 +6,33 @@ describe('jbootvalidator(required)', function () {
         $(document.body).append(form);
     });
 
+    it('should add has-error class when required select is blank', function () {
+        var formControl = formControlSelect(true);
+        var formGroup = formGroupDiv()
+            .append(formControl);
+
+        form.append(formGroup)
+            .jBootValidator();
+
+        formControl.trigger('change');
+
+        expect(formGroup.hasClass('has-error')).toBe(true);
+    });
+
+    it('should add help-block after form control when required input is blank', function () {
+        var formControl = formControlSelect(true);
+        var formGroup = formGroupDiv()
+            .append(formControl);
+
+        form.append(formGroup)
+            .jBootValidator();
+
+        formControl.trigger('change');
+
+        var $span = formGroup.find('span.help-block.jbootval');
+        expect($span.text()).toBe('This field is required.');
+    });
+
     it('should add has-error class when required input is blank', function () {
         var formControl = formControlInput(true);
         var formGroup = formGroupDiv()
@@ -162,6 +189,16 @@ describe('jbootvalidator(required)', function () {
             $input.attr('required', true);
         }
         return $input;
+    }
+
+    function formControlSelect(required) {
+        var $select = $('<select>').addClass('form-control')
+            .append($('<option>').val('').text('Select One').attr('disabled', 'disabled').attr('selected', 'selected'))
+            .append($('<option>').val('Valid').text('Valid'));
+        if (required) {
+            $select.attr('required', true);
+        }
+        return $select;
     }
 
     function helpBlockSpan() {

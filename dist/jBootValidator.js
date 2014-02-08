@@ -15,7 +15,7 @@
 
         return this
             .attr('novalidate', 'novalidate')
-            .find('input.form-control').bind('keyup focus', function (e) {
+            .find('.form-control').bind('keyup focus change', function (e) {
             var $input = $(this),
                 $formGroup = $input.closest('.form-group'),
                 val = $input.val(),
