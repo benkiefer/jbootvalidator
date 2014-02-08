@@ -19,7 +19,7 @@ describe('jbootvalidator(required)', function () {
         expect(formGroup.hasClass('has-error')).toBe(true);
     });
 
-    it('should add has-error class when required input is blank including spaces', function () {
+    it('should add has-error class when required input is only spaces', function () {
         var formControl = formControlInput(true)
             .val('      ');
         var formGroup = formGroupDiv()
@@ -45,6 +45,21 @@ describe('jbootvalidator(required)', function () {
 
         var $span = formGroup.find('span.help-block.jbootval');
         expect($span.text()).toBe('This field is required.');
+    });
+
+    it('should only add help-block once regardless of number of keyups', function () {
+        var formControl = formControlInput(true);
+        var formGroup = formGroupDiv()
+            .append(formControl);
+
+        form.append(formGroup)
+            .jBootValidator();
+
+        formControl.trigger('keyup');
+        formControl.trigger('keyup');
+
+        var $span = formGroup.find('span.help-block.jbootval');
+        expect($span.length).toBe(1);
     });
 
     it('should not add help-block as a child of the form-group should always be after form-control', function () {
