@@ -16,10 +16,10 @@ module.exports = function(config) {
     files: [
       'lib/jquery.min.js',
       'lib/bootstrap.min.js',
+      'lib/sinon.js',
       'src/**/*.js',
       'test/**/*Spec.js'
     ],
-
 
     // list of files to exclude
     exclude: [
