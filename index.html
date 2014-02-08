@@ -3,34 +3,47 @@
 <html lang="en-US">
 
 <head>
-    <title>Backbone Play</title>
-
+    <title>JBootValidator Demo</title>
     <script src="lib/jquery.min.js"></script>
     <script src="lib/bootstrap.min.js"></script>
     <script src="dist/jBootValidator.min.js"></script>
     <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style type="text/css">
+        body { padding-top: 70px; }
+    </style>
 </head>
+
 <body>
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <div class="col-md-12">
             <fieldset>
-                <legend>User Information</legend>
+                <legend>Sample Form</legend>
                 <form novalidate class="form-horizontal">
+
+                    <div id="error" style="display:none" class="alert alert-danger">
+                        You've got problems.
+                    </div>
+
+                    <div id="victory" style="display:none" class="alert alert-success">
+                        Victory!
+                    </div>
+
                     <div class="form-group">
                         <label for="firstName" class="col-xs-4 control-label">First Name</label>
+
                         <div class="col-xs-8 col-sm-4">
                             <input type="text" id="firstName" name="firstName"
                                    class="form-control"
-                                   pattern="\w+"
+                                   pattern="\b\w+\b$"
                                    autocomplete="off"
                                    title="That can't possibly be your name." placeholder="First Name" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="age" class="col-xs-4 control-label">Age</label>
+
                         <div class="col-xs-8 col-sm-4">
                             <input type="text" id="age" name="age"
                                    class="form-control"
@@ -38,15 +51,30 @@
                                    autocomplete="off"
                                    title="Numbers only please." placeholder="Age" required>
                         </div>
+
+                    </div>
+                    <div class="form-actions">
+                        <div class="col-xs-offset-4 col-xs-8">
+                            <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+                        </div>
                     </div>
                 </form>
             </fieldset>
         </div>
-        </div>
     </div>
 </div>
 <script>
-    $('form').jBootValidator();
+    $('form').submit(function (e) {
+        e.preventDefault();
+        $(this).find('input.form-control').trigger('keyup');
+        if ($(this).find('.form-group.has-error').length > 0) {
+            $('#error').show();
+            $('#victory').hide();
+        } else {
+            $('#error').hide();
+            $('#victory').show();
+        }
+    }).jBootValidator();
 </script>
 </body>
 </html>
