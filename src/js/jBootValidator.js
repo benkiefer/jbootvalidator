@@ -2,6 +2,9 @@
     'use strict';
 
     $.fn.jBootValidator = function () {
+        var invalidPattern = 'This field is invalid.',
+            missingRequired = 'This field is required.';
+
         function createHelpBlock(text) {
             return '<span class="help-block jbootval">' + text + '</span>';
         }
@@ -20,7 +23,7 @@
             if ($input.attr('required')) {
                 if (val === null || val.trim() === '') {
                     if (doesntHaveHelpBlock($formGroup)) {
-                        $input.after(createHelpBlock('This field is required.'));
+                        $input.after(createHelpBlock(missingRequired));
                         $formGroup.addClass('has-error');
                     }
                 } else {
@@ -30,7 +33,7 @@
             if (pattern) {
                 if (!new RegExp(pattern).test(val)) {
                     if (doesntHaveHelpBlock($formGroup)) {
-                        $input.after(createHelpBlock(title));
+                        $input.after(createHelpBlock(title ? title : invalidPattern));
                         $formGroup.addClass('has-error');
                     }
                 } else {

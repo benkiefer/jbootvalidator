@@ -20,7 +20,7 @@ describe('jbootvalidator(pattern)', function () {
         expect(formGroup.hasClass('has-error')).toBe(true);
     });
 
-    it('should add help-block after form control when required input is blank', function () {
+    it('should add help-block after form control when pattern doesnt match', function () {
         var formControl = formControlInput('\\d+', 'my title');
         var formGroup = formGroupDiv()
             .append(formControl);
@@ -32,6 +32,34 @@ describe('jbootvalidator(pattern)', function () {
 
         var $span = formGroup.find('span.help-block.jbootval');
         expect($span.text()).toBe('my title');
+    });
+
+    it('should add help-block with default message when pattern doesnt match and no title attribute', function () {
+        var formControl = formControlInput('\\d+');
+        var formGroup = formGroupDiv()
+            .append(formControl);
+
+        form.append(formGroup)
+            .jBootValidator();
+
+        formControl.trigger('keyup');
+
+        var $span = formGroup.find('span.help-block.jbootval');
+        expect($span.text()).toBe('This field is invalid.');
+    });
+
+    it('should add help-block with default message when pattern doesnt match and title attribute is blank', function () {
+        var formControl = formControlInput('\\d+', '');
+        var formGroup = formGroupDiv()
+            .append(formControl);
+
+        form.append(formGroup)
+            .jBootValidator();
+
+        formControl.trigger('keyup');
+
+        var $span = formGroup.find('span.help-block.jbootval');
+        expect($span.text()).toBe('This field is invalid.');
     });
 
     it('should only add help-block once regardless of number of keyups', function () {
@@ -149,9 +177,11 @@ describe('jbootvalidator(pattern)', function () {
     }
 
     function formControlInput(pattern, title) {
-        return $('<input>').addClass('form-control')
-            .attr('pattern', pattern)
-            .attr('title', title);
+        var $input = $('<input>').addClass('form-control').attr('pattern', pattern);
+        if (title){
+            $input.attr('title', title);
+        }
+        return $input;
     }
 
     function helpBlockSpan() {
