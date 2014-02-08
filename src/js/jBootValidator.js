@@ -2,6 +2,12 @@
     'use strict';
 
     $.fn.jBootValidator = function () {
+        if(typeof String.prototype.trim !== 'function') {
+          String.prototype.trim = function() {
+            return this.replace(/^\s+|\s+$/g, '');
+          };
+        }
+
         var invalidPattern = 'This field is invalid.',
             missingRequired = 'This field is required.';
 
