@@ -13,7 +13,7 @@
             return el.find('span.help-block.jbootval').length === 0;
         }
 
-        return this.find('input.form-control').bind('keyup', function (e) {
+        return this.find('input.form-control').bind('keyup focus', function (e) {
             var $input = $(this),
                 $formGroup = $input.closest('.form-group'),
                 val = $input.val(),

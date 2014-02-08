@@ -19,6 +19,19 @@ describe('jbootvalidator(required)', function () {
         expect(formGroup.hasClass('has-error')).toBe(true);
     });
 
+    it('should also be triggered by focus', function () {
+        var formControl = formControlInput(true);
+        var formGroup = formGroupDiv()
+            .append(formControl);
+
+        form.append(formGroup)
+            .jBootValidator();
+
+        formControl.trigger('focus');
+
+        expect(formGroup.hasClass('has-error')).toBe(true);
+    });
+
     it('should add has-error class when required input is only spaces', function () {
         var formControl = formControlInput(true)
             .val('      ');

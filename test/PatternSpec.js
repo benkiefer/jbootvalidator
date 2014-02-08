@@ -20,6 +20,20 @@ describe('jbootvalidator(pattern)', function () {
         expect(formGroup.hasClass('has-error')).toBe(true);
     });
 
+    it('should also be triggered by focus', function () {
+        var formControl = formControlInput('\\d+', '');
+
+        var formGroup = formGroupDiv()
+            .append(formControl);
+
+        form.append(formGroup)
+            .jBootValidator();
+
+        formControl.trigger('focus');
+
+        expect(formGroup.hasClass('has-error')).toBe(true);
+    });
+
     it('should add help-block after form control when pattern doesnt match', function () {
         var formControl = formControlInput('\\d+', 'my title');
         var formGroup = formGroupDiv()
