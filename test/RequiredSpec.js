@@ -19,7 +19,7 @@ describe('jbootvalidator(required)', function () {
         expect(formGroup.hasClass('has-error')).toBe(true);
     });
 
-    it('should add help-block after form control when required input is blank', function () {
+    it('should add help-block after select when required but not selected', function () {
         var formControl = formControlSelect(true);
         var formGroup = formGroupDiv()
             .append(formControl);
@@ -32,6 +32,59 @@ describe('jbootvalidator(required)', function () {
         var $span = formGroup.find('span.help-block.jbootval');
         expect($span.text()).toBe('This field is required.');
     });
+
+    it('should not add help-block after select when required value is present', function () {
+        var formControl = formControlSelect(true).val('Valid');
+        var formGroup = formGroupDiv()
+            .append(formControl);
+
+        form.append(formGroup)
+            .jBootValidator();
+
+        formControl.trigger('change');
+
+        expect(formGroup.find('span.help-block.jbootval').length).toBe(0);
+    });
+
+    it('should remove help-block when the required issue is resolved', function () {
+        var formControl = formControlSelect(true).val('Valid');
+
+        var colWidthDiv = $('<div>')
+            .append(formControl)
+            .append(helpBlockSpan());
+
+        var formGroup = formGroupDiv()
+            .append(colWidthDiv);
+
+        form.append(formGroup)
+            .jBootValidator();
+
+        formControl.trigger('change');
+
+        expect(formGroup.find('span.help-block.jbootval').length).toBe(0);
+    });
+
+    it('should not remove non jbootval help-blocks when the required issue is resolved', function () {
+        var formControl = formControlSelect(true).val('Valid');
+
+        var colWidthDiv = $('<div>')
+            .append(formControl)
+            .append($('<span>').addClass('help-block').text('testing'))
+            .append(helpBlockSpan());
+
+        var formGroup = formGroupDiv()
+            .append(colWidthDiv);
+
+        form.append(formGroup)
+            .jBootValidator();
+
+        formControl.trigger('change');
+
+        expect(formGroup.find('span.help-block.jbootval').length).toBe(0);
+        expect(formGroup.find('span.help-block').length).toBe(1);
+    });
+
+
 
     it('should add has-error class when required input is blank', function () {
         var formControl = formControlInput(true);
