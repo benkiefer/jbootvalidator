@@ -1,5 +1,5 @@
 (function ($) {
-    'use strict';
+//    'use strict';
 
     if (typeof $.debounce !== 'function') {
         $.debounce = function (func, wait, immediate) {
@@ -17,7 +17,18 @@
         };
     }
 
-    $.fn.jBootValidator = function () {
+    $.fn.jBootValidator = function (options) {
+        var opts = $.extend({}, $.fn.jBootValidator.defaults, options);
+        if (opts.validationCallback) {
+            this.submit(function (e) {
+                e.preventDefault();
+                if (opts.validateOnSubmit) {
+                    $(this).find('.form-control').each(validate);
+                }
+                opts.validationCallback(e);
+            });
+        }
+
         if (typeof String.prototype.trim !== 'function') {
             String.prototype.trim = function () {
                 return this.replace(/^\s+|\s+$/g, '');
@@ -35,38 +46,43 @@
             return el.find('span.help-block.jbootval').length === 0;
         }
 
+        function validate (e) {
+            var $input = $(this),
+                $formGroup = $input.closest('.form-group'),
+                val = $input.val(),
+                pattern = $input.attr('pattern'),
+                title = $input.attr('title');
+
+            if ($input.attr('required')) {
+                if (val === null || val.trim() === '') {
+                    if (doesntHaveHelpBlock($formGroup)) {
+                        $input.after(createHelpBlock(missingRequired));
+                        $formGroup.addClass('has-error');
+                    }
+                } else {
+                    $formGroup.removeClass('has-error').find('span.help-block.jbootval').remove();
+                }
+            }
+            if (pattern) {
+                if (!new RegExp(pattern).test(val)) {
+                    if (doesntHaveHelpBlock($formGroup)) {
+                        $input.after(createHelpBlock(title ? title : invalidPattern));
+                        $formGroup.addClass('has-error');
+                    }
+                } else {
+                    $formGroup.removeClass('has-error').find('span.help-block.jbootval').remove();
+                }
+            }
+        }
 
         return this.attr('novalidate', 'novalidate')
-            .find('.form-control')
-            .bind('keyup focus change', $.debounce(function (e) {
-                var $input = $(this),
-                    $formGroup = $input.closest('.form-group'),
-                    val = $input.val(),
-                    pattern = $input.attr('pattern'),
-                    title = $input.attr('title');
-
-                if ($input.attr('required')) {
-                    if (val === null || val.trim() === '') {
-                        if (doesntHaveHelpBlock($formGroup)) {
-                            $input.after(createHelpBlock(missingRequired));
-                            $formGroup.addClass('has-error');
-                        }
-                    } else {
-                        $formGroup.removeClass('has-error').find('span.help-block.jbootval').remove();
-                    }
-                }
-                if (pattern) {
-                    if (!new RegExp(pattern).test(val)) {
-                        if (doesntHaveHelpBlock($formGroup)) {
-                            $input.after(createHelpBlock(title ? title : invalidPattern));
-                            $formGroup.addClass('has-error');
-                        }
-                    } else {
-                        $formGroup.removeClass('has-error').find('span.help-block.jbootval').remove();
-                    }
-                }
-            }, 300)
-        );
+            .find('.form-control').bind('keyup focus change', $.debounce(validate, 300));
     };
+
+    $.fn.jBootValidator.defaults = {
+        validateOnSubmit: false,
+        validationCallback: undefined
+    };
+
 }(jQuery));
 
