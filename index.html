@@ -76,17 +76,16 @@
     </div>
 </div>
 <script>
-    $('form').submit(function (e) {
-        e.preventDefault();
-        $(this).find('.form-control').trigger('change');
-        if ($(this).find('.form-group.has-error').length > 0) {
+    var callback = function (e) {
+        if ($('form').find('.form-group.has-error').length > 0) {
             $('#error').show();
             $('#victory').hide();
         } else {
             $('#error').hide();
             $('#victory').show();
         }
-    }).jBootValidator();
+    };
+    $('form').jBootValidator({validateOnSubmit: true, validationCallback: callback});
 </script>
 </body>
 </html>
