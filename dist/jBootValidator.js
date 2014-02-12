@@ -72,7 +72,12 @@
             if (pattern) {
                 if (!new RegExp(pattern).test(val)) {
                     if (doesntHaveHelpBlock($formGroup)) {
-                        $input.after(createHelpBlock(title ? title : invalidPattern));
+                        var patternHelp = createHelpBlock(title ? title : invalidPattern);
+                        if ($inputGroup.length > 0){
+                            $inputGroup.after(patternHelp);
+                        } else {
+                            $input.after(patternHelp);
+                        }
                         $formGroup.addClass('has-error');
                     }
                 } else {
