@@ -48,6 +48,9 @@ module.exports = function (grunt) {
             }
         },
         jshint: {
+            options: {
+                shadow: true
+            },
             all: ['Gruntfile.js', 'src/**/*.js', 'test/**/*.js']
         }
     });
