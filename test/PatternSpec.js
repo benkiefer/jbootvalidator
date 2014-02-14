@@ -1,4 +1,4 @@
-define(['jBootValidator', 'sinon'], function (JBootValidator, Sinon) {
+define(['jBootValidator', 'sinon'], function (jBootValidator, Sinon) {
     describe('jbootvalidator(pattern)', function () {
         var form;
 
@@ -9,7 +9,7 @@ define(['jBootValidator', 'sinon'], function (JBootValidator, Sinon) {
         });
 
         it('should add has-error class when pattern does not match', function () {
-            var formControl = formControlInput('\\d+', '');
+            var formControl = formControlInput('\\d+', '').val('b');
 
             var formGroup = formGroupDiv()
                 .append(formControl);
@@ -24,7 +24,7 @@ define(['jBootValidator', 'sinon'], function (JBootValidator, Sinon) {
         });
 
         it('should also be triggered by focus', function () {
-            var formControl = formControlInput('\\d+', '');
+            var formControl = formControlInput('\\d+', '').val('b');
 
             var formGroup = formGroupDiv()
                 .append(formControl);
@@ -39,7 +39,7 @@ define(['jBootValidator', 'sinon'], function (JBootValidator, Sinon) {
         });
 
         it('should add help-block after form control when pattern doesnt match', function () {
-            var formControl = formControlInput('\\d+', 'my title');
+            var formControl = formControlInput('\\d+', 'my title').val('b');
             var formGroup = formGroupDiv()
                 .append(formControl);
 
@@ -54,7 +54,7 @@ define(['jBootValidator', 'sinon'], function (JBootValidator, Sinon) {
         });
 
         it('should add help-block with default message when pattern doesnt match and no title attribute', function () {
-            var formControl = formControlInput('\\d+');
+            var formControl = formControlInput('\\d+').val('b');
             var formGroup = formGroupDiv()
                 .append(formControl);
 
@@ -69,7 +69,7 @@ define(['jBootValidator', 'sinon'], function (JBootValidator, Sinon) {
         });
 
         it('should add help-block with default message when pattern doesnt match and title attribute is blank', function () {
-            var formControl = formControlInput('\\d+', '');
+            var formControl = formControlInput('\\d+', '').val('b');
             var formGroup = formGroupDiv()
                 .append(formControl);
 
@@ -84,7 +84,7 @@ define(['jBootValidator', 'sinon'], function (JBootValidator, Sinon) {
         });
 
         it('should only add help-block once regardless of number of keyups', function () {
-            var formControl = formControlInput('\\d+', 'my title');
+            var formControl = formControlInput('\\d+', 'my title').val('b');
             var formGroup = formGroupDiv()
                 .append(formControl);
 
@@ -101,7 +101,7 @@ define(['jBootValidator', 'sinon'], function (JBootValidator, Sinon) {
         });
 
         it('should not add help-block as a child of the form-group should always be after form-control', function () {
-            var formControl = formControlInput('\\d+', 'my title');
+            var formControl = formControlInput('\\d+', 'my title').val('b');
             var colWidthDiv = $('<div>')
                 .append(formControl);
 
@@ -121,7 +121,7 @@ define(['jBootValidator', 'sinon'], function (JBootValidator, Sinon) {
         });
 
         it('should not add help-block as a child of the form-group should always be after form-control', function () {
-            var formControl = formControlInput('\\d+', 'my title');
+            var formControl = formControlInput('\\d+', 'my title').val('b');
             var colWidthDiv = $('<div>')
                 .append(formControl);
 
