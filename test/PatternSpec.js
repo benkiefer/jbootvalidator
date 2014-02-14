@@ -23,6 +23,22 @@ define(['jBootValidator', 'sinon'], function (jBootValidator, Sinon) {
             expect(formGroup.hasClass('has-error')).toBe(true);
         });
 
+        it('shouldnt do anything if the value is blank', function () {
+            var formControl = formControlInput('\\d+', '').val('');
+
+            var formGroup = formGroupDiv()
+                .append(formControl);
+
+            form.append(formGroup)
+                .jBootValidator();
+
+            formControl.trigger('keyup');
+            this.clock.tick(301);
+
+            expect(formGroup.hasClass('has-error')).toBe(false);
+            expect(formGroup.find('span.help-block.jbootval').length).toBe(0);
+        });
+
         it('should also be triggered by focus', function () {
             var formControl = formControlInput('\\d+', '').val('b');
 
