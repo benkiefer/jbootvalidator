@@ -12,8 +12,8 @@ module.exports = function (grunt) {
         uglify: {
             javascript: {
                 join: true,
-                src: 'src/js/jBootValidator.js',
-                dest: 'build/js/jBootValidator.min.js'
+                src: 'src/jBootValidator.js',
+                dest: 'build/jBootValidator.min.js'
             }
         },
         clean: {
@@ -33,14 +33,14 @@ module.exports = function (grunt) {
         },
         copy: {
             minifiedJs: {
-                cwd: 'build/js/',
+                cwd: 'build/',
                 src: '*.js',
                 dest: 'dist/',
                 flatten: true,
                 expand: true
             },
             fullJs: {
-                cwd: 'src/js/',
+                cwd: 'src/',
                 src: '*.js',
                 dest: 'dist/',
                 flatten: true,

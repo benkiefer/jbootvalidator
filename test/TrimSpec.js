@@ -1,22 +1,20 @@
-//describe('jbootvalidator', function () {
-//    var form;
-//
-//    beforeEach(function () {
-//        form = $('<form>');
-//        $(document.body).append(form);
-//    });
-//
-//    it('should add trim function when it does not exist', function () {
-//        String.prototype.trim = undefined;
-//
-//        expect('boo '.trim).toBe(undefined);
-//        form.jBootValidator();
-//
-//        expect('boo '.trim()).toBe('boo');
-//    });
-//
-//    afterEach(function () {
-//        form.remove();
-//        form = null;
-//    });
-//});
+define(['sinon'], function (Sinon) {
+    describe('jbootvalidator(required) select', function () {
+
+        beforeEach(function () {
+            String.prototype.trim = sinon.stub();
+        });
+
+        it('should add trim function when it does not exist', function () {
+            define(['jBootValidator'], function (JBootValidator) {
+                expect('boo'.trim()).toBe('boo');
+            });
+        });
+
+        afterEach(function () {
+            sinon.restore([
+                String.prototype.trim
+            ]);
+        });
+    });
+});

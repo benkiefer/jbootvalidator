@@ -1,75 +1,79 @@
-describe('jbootvalidator(required) input', function () {
-    var form;
+define(['jBootValidator', 'sinon'], function (JBootValidator, Sinon) {
 
-    beforeEach(function () {
-        this.clock = sinon.useFakeTimers();
-        form = $('<form>');
-        $(document.body).append(form);
-    });
+    describe('jbootvalidator(required) input', function () {
+        var form;
 
-    it('should add help block after the input group when a required input is in an input-group', function () {
-        var formControl = formControlInput(true).val(''),
-            inputGroup = $('<div>').addClass('input-group'),
-            addon = $('<span>').addClass('input-group-addon').text('$');
+        beforeEach(function () {
+            this.clock = sinon.useFakeTimers();
+            form = $('<form>');
+            $(document.body).append(form);
+        });
 
-        inputGroup.append(addon).append(formControl);
+        it('should add help block after the input group when a required input is in an input-group', function () {
+            var formControl = formControlInput(true).val(''),
+                inputGroup = $('<div>').addClass('input-group'),
+                addon = $('<span>').addClass('input-group-addon').text('$');
 
-        var colWidthDiv = $('<div>').addClass('col-md-12').append(inputGroup);
+            inputGroup.append(addon).append(formControl);
 
-        var formGroup = formGroupDiv()
-            .append(colWidthDiv);
+            var colWidthDiv = $('<div>').addClass('col-md-12').append(inputGroup);
 
-        form.append(formGroup)
-            .jBootValidator();
+            var formGroup = formGroupDiv()
+                .append(colWidthDiv);
 
-        formControl.trigger('keyup');
-        this.clock.tick(301);
+            form.append(formGroup)
+                .jBootValidator();
 
-        expect(formGroup.hasClass('has-error')).toBe(true);
+            formControl.trigger('keyup');
+            this.clock.tick(301);
 
-        expect(form.find('span.help-block.jbootval').length).toBe(1);
-        expect($('.input-group').find('span.help-block.jbootval').length).toBe(0);
-    });
+            expect(formGroup.hasClass('has-error')).toBe(true);
 
-    it('should add help block after the input group when a pattern input is in an input-group', function () {
-        var formControl = formControlInput(false).val('blah').attr('pattern', '\\d+'),
-            inputGroup = $('<div>').addClass('input-group'),
-            addon = $('<span>').addClass('input-group-addon').text('$');
+            expect(form.find('span.help-block.jbootval').length).toBe(1);
+            expect($('.input-group').find('span.help-block.jbootval').length).toBe(0);
+        });
 
-        inputGroup.append(addon).append(formControl);
+        it('should add help block after the input group when a pattern input is in an input-group', function () {
+            var formControl = formControlInput(false).val('blah').attr('pattern', '\\d+'),
+                inputGroup = $('<div>').addClass('input-group'),
+                addon = $('<span>').addClass('input-group-addon').text('$');
 
-        var colWidthDiv = $('<div>').addClass('col-md-12').append(inputGroup);
+            inputGroup.append(addon).append(formControl);
 
-        var formGroup = formGroupDiv()
-            .append(colWidthDiv);
+            var colWidthDiv = $('<div>').addClass('col-md-12').append(inputGroup);
 
-        form.append(formGroup)
-            .jBootValidator();
+            var formGroup = formGroupDiv()
+                .append(colWidthDiv);
 
-        formControl.trigger('keyup');
-        this.clock.tick(301);
+            form.append(formGroup)
+                .jBootValidator();
 
-        expect(formGroup.hasClass('has-error')).toBe(true);
+            formControl.trigger('keyup');
+            this.clock.tick(301);
 
-        expect(form.find('span.help-block.jbootval').length).toBe(1);
-        expect($('.input-group').find('span.help-block.jbootval').length).toBe(0);
-    });
+            expect(formGroup.hasClass('has-error')).toBe(true);
 
-    function formGroupDiv() {
-        return $('<div>').addClass('form-group');
-    }
+            expect(form.find('span.help-block.jbootval').length).toBe(1);
+            expect($('.input-group').find('span.help-block.jbootval').length).toBe(0);
+        });
 
-    function formControlInput(required) {
-        var $input = $('<input>').addClass('form-control');
-        if (required) {
-            $input.attr('required', true);
+        function formGroupDiv() {
+            return $('<div>').addClass('form-group');
         }
-        return $input;
-    }
 
-    afterEach(function () {
-        this.clock.restore();
-        form.remove();
-        form = null;
+        function formControlInput(required) {
+            var $input = $('<input>').addClass('form-control');
+            if (required) {
+                $input.attr('required', true);
+            }
+            return $input;
+        }
+
+        afterEach(function () {
+            this.clock.restore();
+            form.remove();
+            form = null;
+        });
     });
 });
+
