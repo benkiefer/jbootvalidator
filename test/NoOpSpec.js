@@ -45,7 +45,7 @@ define(['jBootValidator', 'sinon'], function (JBootValidator, Sinon) {
         }
 
         function formControlInput() {
-            return $('<input>').addClass('form-control');
+            return $('<input>').addClass('form-control').attr('type', 'text');
         }
 
         afterEach(function () {

@@ -169,7 +169,7 @@ define(['jBootValidator', 'sinon'], function (JBootValidator, Sinon) {
         }
 
         function formControlInput(required) {
-            var $input = $('<input>').addClass('form-control');
+            var $input = $('<input>').addClass('form-control').attr('type', 'text');
             if (required) {
                 $input.attr('required', true);
             }
