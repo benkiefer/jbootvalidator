@@ -103,6 +103,7 @@
 </div>
 <script>
     var callback = function (e) {
+        e.preventDefault();
         if ($('form').find('.form-group.has-error').length > 0) {
             $('#error').show();
             $('#victory').hide();

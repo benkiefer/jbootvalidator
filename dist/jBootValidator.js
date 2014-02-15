@@ -23,7 +23,10 @@
     }
 
     var __extends = this.__extends || function (d, b) {
-        function __() { this.constructor = d; }
+        function __() {
+            this.constructor = d;
+        }
+
         __.prototype = b.prototype;
         d.prototype = new __();
     };
@@ -33,7 +36,6 @@
             this.input = input;
             this.formGroup = input.closest('.form-group');
             this.inputGroup = input.closest('.input-group');
-            this.checkboxDiv = input.closest('div.checkbox');
             this.val = input.val();
         }
 
@@ -41,7 +43,7 @@
             return '<span class="help-block jbootval">' + text + '</span>';
         };
 
-        Rule.prototype.isBlank = function(){
+        Rule.prototype.isBlank = function () {
             return this.val === null || this.val.trim() === '';
         };
 
@@ -49,19 +51,21 @@
             return this.formGroup.find('span.help-block.jbootval').length === 0;
         };
 
+        Rule.prototype.appendHelpBlock = function (helpBlock) {
+            if (this.inputGroup.length > 0) {
+                this.inputGroup.after(helpBlock);
+            }
+            else {
+                this.input.after(helpBlock);
+            }
+        };
+
         Rule.prototype.validate = function () {
             if (this.shouldValidate()) {
                 if (this.isInvalid()) {
                     if (this.doesntHaveHelpBlock()) {
                         var helpBlock = this.createHelpBlock(this.getMessage());
-                        if (this.inputGroup.length > 0){
-                            this.inputGroup.after(helpBlock);
-                        } else if (this.checkboxDiv.length > 0) {
-                            this.checkboxDiv.after(helpBlock);
-                        }
-                        else {
-                            this.input.after(helpBlock);
-                        }
+                        this.appendHelpBlock(helpBlock);
                         this.formGroup.addClass('has-error');
                     }
                 } else {
@@ -70,9 +74,12 @@
             }
         };
 
-        Rule.prototype.getMessage = function () { };
-        Rule.prototype.shouldValidate = function () { };
-        Rule.prototype.isInvalid = function () { };
+        Rule.prototype.getMessage = function () {
+        };
+        Rule.prototype.shouldValidate = function () {
+        };
+        Rule.prototype.isInvalid = function () {
+        };
         return Rule;
     })();
 
@@ -99,6 +106,7 @@
     var RequiredCheckBoxRule = (function (_super) {
         __extends(RequiredCheckBoxRule, _super);
         function RequiredCheckBoxRule(input) {
+            this.checkboxDiv = input.closest('div.checkbox');
             _super.call(this, input);
         }
 
@@ -108,6 +116,10 @@
 
         RequiredCheckBoxRule.prototype.getMessage = function () {
             return 'This field is required.';
+        };
+
+        RequiredCheckBoxRule.prototype.appendHelpBlock = function (helpBlock) {
+            this.checkboxDiv.after(helpBlock);
         };
 
         RequiredCheckBoxRule.prototype.isInvalid = function () {
@@ -142,15 +154,14 @@
         var opts = $.extend({}, $.fn.jBootValidator.defaults, options);
         if (opts.validationCallback) {
             this.submit(function (e) {
-                e.preventDefault();
                 if (opts.validateOnSubmit) {
-                    $(this).find('input').each(validate);
+                    $(this).find('input, select').each(validate);
                 }
                 opts.validationCallback(e);
             });
         }
 
-        function validate (e) {
+        function validate(e) {
             var $input = $(this);
             new RequiredTextRule($input).validate();
             new RequiredCheckBoxRule($input).validate();
