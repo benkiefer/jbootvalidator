@@ -8,6 +8,16 @@ define(['jBootValidator', 'sinon'], function (JBootValidator, Sinon) {
             $(document.body).append(form);
         });
 
+        it('can validate an input without using full jBootValidator', function () {
+            var checkbox = checkboxDiv(true, false),
+                colWidthDiv = $('<div>').append(checkbox),
+                formGroup = formGroupDiv().append(colWidthDiv);
+
+            checkbox.find('input').jbValidate();
+
+            expect(formGroup.hasClass('has-error')).toBe(true);
+        });
+
         it('should add has-error class when required checkbox is not checked', function () {
             var checkbox = checkboxDiv(true, false),
                 colWidthDiv = $('<div>').append(checkbox),

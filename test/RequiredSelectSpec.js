@@ -8,6 +8,16 @@ define(['jBootValidator', 'sinon'], function (JBootValidator, Sinon) {
             $(document.body).append(form);
         });
 
+        it('can validate an input without using full jBootValidator', function () {
+            var formControl = formControlSelect(true);
+            var formGroup = formGroupDiv()
+                .append(formControl);
+
+            formControl.jbValidate();
+
+            expect(formGroup.hasClass('has-error')).toBe(true);
+        });
+
         it('should add has-error class when required select is blank', function () {
             var formControl = formControlSelect(true);
             var formGroup = formGroupDiv()

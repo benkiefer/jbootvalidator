@@ -150,26 +150,26 @@
         return PatternRule;
     })(Rule);
 
+    $.fn.jbValidate = function (e) {
+        var $input = $(this);
+        new RequiredTextRule($input).validate();
+        new RequiredCheckBoxRule($input).validate();
+        new PatternRule($input).validate();
+    };
+
     $.fn.jBootValidator = function (options) {
         var opts = $.extend({}, $.fn.jBootValidator.defaults, options);
         if (opts.validationCallback) {
             this.submit(function (e) {
                 if (opts.validateOnSubmit) {
-                    $(this).find('input, select').each(validate);
+                    $(this).find('input, select').each($.fn.jbValidate);
                 }
                 opts.validationCallback(e);
             });
         }
 
-        function validate(e) {
-            var $input = $(this);
-            new RequiredTextRule($input).validate();
-            new RequiredCheckBoxRule($input).validate();
-            new PatternRule($input).validate();
-        }
-
         return this.attr('novalidate', 'novalidate')
-            .find('select, input').bind('keyup focus change', $.debounce(validate, 300));
+            .find('select, input').bind('keyup focus change', $.debounce($.fn.jbValidate, 300));
     };
 
     $.fn.jBootValidator.defaults = {

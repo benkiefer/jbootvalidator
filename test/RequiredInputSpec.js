@@ -22,6 +22,16 @@ define(['jBootValidator', 'sinon'], function (JBootValidator, Sinon) {
             expect(formGroup.hasClass('has-error')).toBe(true);
         });
 
+        it('can validate an input without using full jBootValidator', function () {
+            var formControl = formControlInput(true);
+            var formGroup = formGroupDiv()
+                .append(formControl);
+
+            formControl.jbValidate();
+
+            expect(formGroup.hasClass('has-error')).toBe(true);
+        });
+
         it('should also be triggered by focus', function () {
             var formControl = formControlInput(true);
             var formGroup = formGroupDiv()
