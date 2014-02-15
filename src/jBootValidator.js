@@ -74,12 +74,9 @@
             }
         };
 
-        Rule.prototype.getMessage = function () {
-        };
-        Rule.prototype.shouldValidate = function () {
-        };
-        Rule.prototype.isInvalid = function () {
-        };
+        Rule.prototype.getMessage = function () { };
+        Rule.prototype.shouldValidate = function () { };
+        Rule.prototype.isInvalid = function () { };
         return Rule;
     })();
 
@@ -169,7 +166,7 @@
         }
 
         return this.attr('novalidate', 'novalidate')
-            .find('select, input').bind('keyup focus change', $.debounce($.fn.jbValidate, 300));
+            .find('select, input').bind('keyup focus change blur', $.debounce($.fn.jbValidate, 300));
     };
 
     $.fn.jBootValidator.defaults = {
