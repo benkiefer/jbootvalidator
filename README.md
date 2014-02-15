@@ -7,6 +7,5 @@ I'm going to throw this together as a quick fall-back for when I can't let the b
 [Demo](http://benkiefer.github.io/jbootvalidator)
 
 ###Todo
- - clean up how help-block is applied so that base rule is cleaner
  - fix select box so that it is in a separate rule.
  - add test coverage for when required is removed from and added toan input after jbootvalidator has been initialized.
