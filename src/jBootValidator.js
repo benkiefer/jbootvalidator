@@ -111,7 +111,7 @@
         };
 
         RequiredCheckBoxRule.prototype.isInvalid = function () {
-            return !this.input.attr('checked');
+            return !this.input.is(':checked');
         };
         return RequiredCheckBoxRule;
     })(Rule);
