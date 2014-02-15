@@ -4,5 +4,9 @@ IE 8 and 9 make me sad. They don't support either the "required" or "pattern" at
 
 I'm going to throw this together as a quick fall-back for when I can't let the browser do it's job.
 
+[Demo](http://benkiefer.github.io/jbootvalidator)
+
 ###Todo
- - if a field isn't required, don't apply pattern validation on form submission, just on keyup.
+ - clean up how help-block is applied so that base rule is cleaner
+ - fix select box so that it is in a separate rule.
+ - add test coverage for when required is removed from and added toan input after jbootvalidator has been initialized.
