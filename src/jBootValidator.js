@@ -154,9 +154,8 @@
         var opts = $.extend({}, $.fn.jBootValidator.defaults, options);
         if (opts.validationCallback) {
             this.submit(function (e) {
-                e.preventDefault();
                 if (opts.validateOnSubmit) {
-                    $(this).find('input').each(validate);
+                    $(this).find('input, select').each(validate);
                 }
                 opts.validationCallback(e);
             });
