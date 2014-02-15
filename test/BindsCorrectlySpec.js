@@ -54,7 +54,6 @@ define(['jBootValidator', 'sinon'], function (JBootValidator, Sinon) {
             form.append($input).jBootValidator();
 
             $input.trigger('blur');
-            this.clock.tick(301);
 
             expect(this.jbValStub.callCount).toBe(1);
         });
@@ -104,7 +103,6 @@ define(['jBootValidator', 'sinon'], function (JBootValidator, Sinon) {
             form.append($input).jBootValidator();
 
             $input.trigger('blur');
-            this.clock.tick(301);
 
             expect(this.jbValStub.callCount).toBe(1);
         });
