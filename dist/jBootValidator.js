@@ -63,8 +63,10 @@
         };
 
         Rule.prototype.validate = function () {
+            var result = true;
             if (this.shouldValidate()) {
                 if (this.isInvalid()) {
+                    result = false;
                     if (this.doesntHaveHelpBlock()) {
                         var helpBlock = this.createHelpBlock(this.getMessage());
                         this.appendHelpBlock(helpBlock);
@@ -74,7 +76,7 @@
                     this.formGroup.find('span.help-block.'  + this.failureClass()).remove();
                 }
             }
-            return true;
+            return result;
         };
 
         Rule.prototype.getMessage = function () { };

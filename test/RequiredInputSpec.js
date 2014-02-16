@@ -115,6 +115,7 @@ define(['jBootValidator', 'sinon'], function (JBootValidator, Sinon) {
 
             var $span = formGroup.find('span.help-block.jb-input-reqd');
             expect($span.length).toBe(1);
+            expect(formGroup.hasClass('has-error')).toBe(true);
         });
 
         it('should not add help-block as a child of the form-group should always be after form-control', function () {
