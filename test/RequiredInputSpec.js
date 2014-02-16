@@ -61,7 +61,31 @@ define(['jBootValidator', 'sinon'], function (JBootValidator, Sinon) {
             expect(formGroup.hasClass('has-error')).toBe(true);
         });
 
-        it('should add help-block after form control when required input is blank', function () {
+        it('should handle changes to the required attribute', function () {
+            var formControl = formControlInput(false);
+            var formGroup = formGroupDiv()
+                .append(formControl);
+
+            form.append(formGroup)
+                .jBootValidator();
+
+            formControl.trigger('keyup');
+            this.clock.tick(301);
+
+            expect(formGroup.hasClass('has-error')).toBe(false);
+
+            formControl.attr('required', '').trigger('keyup');
+            this.clock.tick(301);
+
+            expect(formGroup.hasClass('has-error')).toBe(true);
+
+            formControl.removeAttr('required').trigger('keyup');
+            this.clock.tick(301);
+
+            expect(formGroup.hasClass('has-error')).toBe(false);
+        });
+
+        it('should handle adding and removing of the required attribute', function () {
             var formControl = formControlInput(true);
             var formGroup = formGroupDiv()
                 .append(formControl);
