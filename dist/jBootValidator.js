@@ -66,12 +66,13 @@
                     if (this.doesntHaveHelpBlock()) {
                         var helpBlock = this.createHelpBlock(this.getMessage());
                         this.appendHelpBlock(helpBlock);
-                        this.formGroup.addClass('has-error');
+                        return false;
                     }
                 } else {
-                    this.formGroup.removeClass('has-error').find('span.help-block.jbootval').remove();
+                    this.formGroup.find('span.help-block.jbootval').remove();
                 }
             }
+            return true;
         };
 
         Rule.prototype.getMessage = function () { };
@@ -148,10 +149,19 @@
     })(Rule);
 
     $.fn.jbValidate = function (e) {
-        var $input = $(this);
-        new RequiredTextRule($input).validate();
-        new RequiredCheckBoxRule($input).validate();
-        new PatternRule($input).validate();
+        var $input = $(this),
+            $formGroup = $input.closest('.form-group'),
+            invalid = false;
+
+        invalid = (new RequiredTextRule($input).validate() ? invalid : true);
+        invalid = (new RequiredCheckBoxRule($input).validate() ? invalid : true);
+        invalid = (new PatternRule($input).validate() ? invalid : true);
+
+        if (invalid) {
+            $formGroup.addClass('has-error');
+        } else {
+            $formGroup.removeClass('has-error');
+        }
     };
 
     $.fn.jBootValidator = function (options) {
