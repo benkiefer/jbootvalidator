@@ -43,9 +43,7 @@
             return '<span class="help-block ' + this.failureClass() + '">' + text + '</span>';
         };
 
-        Rule.prototype.failureClass = function () {
-            return 'jbootval';
-        };
+        Rule.prototype.failureClass = function () {};
 
         Rule.prototype.isBlank = function () {
             return this.val === null || this.val.trim() === '';
@@ -99,6 +97,10 @@
             return 'This field is required.';
         };
 
+        RequiredTextRule.prototype.failureClass = function () {
+            return 'jb-input-reqd';
+        };
+
         RequiredTextRule.prototype.isInvalid = function () {
             return this.isBlank();
         };
@@ -124,6 +126,10 @@
             this.checkboxDiv.after(helpBlock);
         };
 
+        RequiredCheckBoxRule.prototype.failureClass = function () {
+            return 'jb-checkbox-reqd';
+        };
+
         RequiredCheckBoxRule.prototype.isInvalid = function () {
             return !this.input.is(':checked');
         };
@@ -144,6 +150,10 @@
 
         PatternRule.prototype.isInvalid = function () {
             return !new RegExp(this.pattern).test(this.val);
+        };
+
+        PatternRule.prototype.failureClass = function () {
+            return 'jb-input-pattern';
         };
 
         PatternRule.prototype.getMessage = function () {

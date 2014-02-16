@@ -43,7 +43,7 @@ define(['jBootValidator', 'sinon'], function (JBootValidator, Sinon) {
             checkbox.find('input').trigger('change');
             this.clock.tick(301);
 
-            expect(formGroup.find('span.help-block.jBootVal').length).toBe(0);
+            expect(formGroup.find('span.help-block.jb-checkbox-reqd').length).toBe(0);
         });
 
         it('should add help-block when required checkbox is not checked', function () {
@@ -57,8 +57,8 @@ define(['jBootValidator', 'sinon'], function (JBootValidator, Sinon) {
             checkbox.find('input').trigger('change');
             this.clock.tick(301);
 
-            expect(colWidthDiv.find('span.help-block.jbootval').length).toBe(1);
-            expect(checkbox.find('span.help-block.jbootval').length).toBe(0);
+            expect(colWidthDiv.find('span.help-block.jb-checkbox-reqd').length).toBe(1);
+            expect(checkbox.find('span.help-block.jb-checkbox-reqd').length).toBe(0);
         });
 
         it('should not add has-error class when required checkbox is checked', function () {
@@ -86,7 +86,7 @@ define(['jBootValidator', 'sinon'], function (JBootValidator, Sinon) {
             checkbox.find('input').trigger('change');
             this.clock.tick(301);
 
-            expect(formGroup.find('span.help-block.jbootval').length).toBe(0);
+            expect(formGroup.find('span.help-block.jb-checkbox-reqd').length).toBe(0);
         });
 
 
@@ -125,7 +125,7 @@ define(['jBootValidator', 'sinon'], function (JBootValidator, Sinon) {
         }
 
         function helpBlockSpan() {
-            return $('<span>').addClass('help-block.jbootval');
+            return $('<span>').addClass('help-block.jb-checkbox-reqd');
         }
 
         afterEach(function () {

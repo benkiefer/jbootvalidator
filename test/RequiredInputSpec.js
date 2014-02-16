@@ -96,7 +96,7 @@ define(['jBootValidator', 'sinon'], function (JBootValidator, Sinon) {
             formControl.trigger('keyup');
             this.clock.tick(301);
 
-            var $span = formGroup.find('span.help-block.jbootval');
+            var $span = formGroup.find('span.help-block.jb-input-reqd');
             expect($span.text()).toBe('This field is required.');
         });
 
@@ -113,7 +113,7 @@ define(['jBootValidator', 'sinon'], function (JBootValidator, Sinon) {
             formControl.trigger('keyup');
             this.clock.tick(301);
 
-            var $span = formGroup.find('span.help-block.jbootval');
+            var $span = formGroup.find('span.help-block.jb-input-reqd');
             expect($span.length).toBe(1);
         });
 
@@ -131,9 +131,9 @@ define(['jBootValidator', 'sinon'], function (JBootValidator, Sinon) {
             formControl.trigger('keyup');
             this.clock.tick(301);
 
-            expect(formGroup.children('span.help-block.jbootval').length).toBe(0);
+            expect(formGroup.children('span.help-block.jb-input-reqd').length).toBe(0);
 
-            var $span = colWidthDiv.find('span.help-block.jbootval');
+            var $span = colWidthDiv.find('span.help-block.jb-input-reqd');
             expect($span.text()).toBe('This field is required.');
         });
 
@@ -153,10 +153,10 @@ define(['jBootValidator', 'sinon'], function (JBootValidator, Sinon) {
             formControl.trigger('keyup');
             this.clock.tick(301);
 
-            expect(formGroup.find('span.help-block.jbootval').length).toBe(0);
+            expect(formGroup.find('span.help-block.jb-input-reqd').length).toBe(0);
         });
 
-        it('should not remove non jbootval help-blocks when the required issue is resolved', function () {
+        it('should not remove non jb-input-reqd help-blocks when the required issue is resolved', function () {
             var formControl = formControlInput(true).val('present');
 
             var colWidthDiv = $('<div>')
@@ -173,7 +173,7 @@ define(['jBootValidator', 'sinon'], function (JBootValidator, Sinon) {
             formControl.trigger('keyup');
             this.clock.tick(301);
 
-            expect(formGroup.find('span.help-block.jbootval').length).toBe(0);
+            expect(formGroup.find('span.help-block.jb-input-reqd').length).toBe(0);
             expect(formGroup.find('span.help-block').length).toBe(1);
         });
 
@@ -211,7 +211,7 @@ define(['jBootValidator', 'sinon'], function (JBootValidator, Sinon) {
         }
 
         function helpBlockSpan() {
-            return $('<span>').addClass('help-block.jbootval');
+            return $('<span>').addClass('help-block.jb-input-reqd');
         }
 
         afterEach(function () {

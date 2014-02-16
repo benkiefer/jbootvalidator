@@ -1,6 +1,6 @@
 define(['jBootValidator', 'sinon'], function (JBootValidator, Sinon) {
 
-    describe('jbootvalidator(required) input', function () {
+    describe('jbootvalidator(required) input with add on', function () {
         var form;
 
         beforeEach(function () {
@@ -29,8 +29,8 @@ define(['jBootValidator', 'sinon'], function (JBootValidator, Sinon) {
 
             expect(formGroup.hasClass('has-error')).toBe(true);
 
-            expect(form.find('span.help-block.jbootval').length).toBe(1);
-            expect($('.input-group').find('span.help-block.jbootval').length).toBe(0);
+            expect(form.find('span.help-block.jb-input-reqd').length).toBe(1);
+            expect($('.input-group').find('span.help-block.jb-input-reqd').length).toBe(0);
         });
 
         it('should add help block after the input group when a pattern input is in an input-group', function () {
@@ -53,8 +53,8 @@ define(['jBootValidator', 'sinon'], function (JBootValidator, Sinon) {
 
             expect(formGroup.hasClass('has-error')).toBe(true);
 
-            expect(form.find('span.help-block.jbootval').length).toBe(1);
-            expect($('.input-group').find('span.help-block.jbootval').length).toBe(0);
+            expect(form.find('span.help-block.jb-input-pattern').length).toBe(1);
+            expect($('.input-group').find('span.help-block.jb-input-pattern').length).toBe(0);
         });
 
         function formGroupDiv() {

@@ -21,7 +21,7 @@ define(['jBootValidator', 'sinon'], function (JBootValidator, Sinon) {
             this.clock.tick(301);
 
             expect(formGroup.hasClass('has-error')).toBe(false);
-            expect(form.find('span.help-block.jbootval').length).toBe(0);
+            expect(form.find('span.help-block.jb-input-reqd').length).toBe(0);
         });
 
         it('should do nothing when no required or pattern attributes on focus', function () {
@@ -37,7 +37,7 @@ define(['jBootValidator', 'sinon'], function (JBootValidator, Sinon) {
             this.clock.tick(301);
 
             expect(formGroup.hasClass('has-error')).toBe(false);
-            expect(form.find('span.help-block.jbootval').length).toBe(0);
+            expect(form.find('span.help-block.jb-input-reqd').length).toBe(0);
         });
 
         function formGroupDiv() {
