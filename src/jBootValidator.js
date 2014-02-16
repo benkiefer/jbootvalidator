@@ -40,7 +40,11 @@
         }
 
         Rule.prototype.createHelpBlock = function (text) {
-            return '<span class="help-block jbootval">' + text + '</span>';
+            return '<span class="help-block ' + this.failureClass() + '">' + text + '</span>';
+        };
+
+        Rule.prototype.failureClass = function () {
+            return 'jbootval';
         };
 
         Rule.prototype.isBlank = function () {
@@ -48,7 +52,7 @@
         };
 
         Rule.prototype.doesntHaveHelpBlock = function () {
-            return this.formGroup.find('span.help-block.jbootval').length === 0;
+            return this.formGroup.find('span.help-block.' + this.failureClass()).length === 0;
         };
 
         Rule.prototype.appendHelpBlock = function (helpBlock) {
@@ -69,7 +73,7 @@
                         return false;
                     }
                 } else {
-                    this.formGroup.find('span.help-block.jbootval').remove();
+                    this.formGroup.find('span.help-block.'  + this.failureClass()).remove();
                 }
             }
             return true;
