@@ -16,12 +16,6 @@
         };
     }
 
-    if (typeof String.prototype.trim !== 'function') {
-        String.prototype.trim = function () {
-            return this.replace(/^\s+|\s+$/g, '');
-        };
-    }
-
     var __extends = this.__extends || function (d, b) {
         function __() {
             this.constructor = d;
@@ -46,7 +40,7 @@
         Rule.prototype.failureClass = function () {};
 
         Rule.prototype.isBlank = function () {
-            return this.val === null || this.val.trim() === '';
+            return this.val === null || $.trim(this.val) === '';
         };
 
         Rule.prototype.doesntHaveHelpBlock = function () {
