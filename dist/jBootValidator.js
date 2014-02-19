@@ -16,12 +16,6 @@
         };
     }
 
-    if (typeof String.prototype.trim !== 'function') {
-        String.prototype.trim = function () {
-            return this.replace(/^\s+|\s+$/g, '');
-        };
-    }
-
     var __extends = this.__extends || function (d, b) {
         function __() {
             this.constructor = d;
@@ -40,15 +34,17 @@
         }
 
         Rule.prototype.createHelpBlock = function (text) {
-            return '<span class="help-block jbootval">' + text + '</span>';
+            return '<span class="help-block ' + this.failureClass() + '">' + text + '</span>';
         };
 
+        Rule.prototype.failureClass = function () {};
+
         Rule.prototype.isBlank = function () {
-            return this.val === null || this.val.trim() === '';
+            return this.val === null || $.trim(this.val) === '';
         };
 
         Rule.prototype.doesntHaveHelpBlock = function () {
-            return this.formGroup.find('span.help-block.jbootval').length === 0;
+            return this.formGroup.find('span.help-block.' + this.failureClass()).length === 0;
         };
 
         Rule.prototype.appendHelpBlock = function (helpBlock) {
@@ -61,17 +57,20 @@
         };
 
         Rule.prototype.validate = function () {
+            var result = true;
             if (this.shouldValidate()) {
                 if (this.isInvalid()) {
+                    result = false;
                     if (this.doesntHaveHelpBlock()) {
                         var helpBlock = this.createHelpBlock(this.getMessage());
                         this.appendHelpBlock(helpBlock);
-                        this.formGroup.addClass('has-error');
+                        return false;
                     }
                 } else {
-                    this.formGroup.removeClass('has-error').find('span.help-block.jbootval').remove();
+                    this.formGroup.find('span.help-block.'  + this.failureClass()).remove();
                 }
             }
+            return result;
         };
 
         Rule.prototype.getMessage = function () { };
@@ -92,6 +91,10 @@
 
         RequiredTextRule.prototype.getMessage = function () {
             return 'This field is required.';
+        };
+
+        RequiredTextRule.prototype.failureClass = function () {
+            return 'jb-input-reqd';
         };
 
         RequiredTextRule.prototype.isInvalid = function () {
@@ -119,6 +122,10 @@
             this.checkboxDiv.after(helpBlock);
         };
 
+        RequiredCheckBoxRule.prototype.failureClass = function () {
+            return 'jb-checkbox-reqd';
+        };
+
         RequiredCheckBoxRule.prototype.isInvalid = function () {
             return !this.input.is(':checked');
         };
@@ -141,6 +148,10 @@
             return !new RegExp(this.pattern).test(this.val);
         };
 
+        PatternRule.prototype.failureClass = function () {
+            return 'jb-input-pattern';
+        };
+
         PatternRule.prototype.getMessage = function () {
             return this.title ? this.title : 'This field is invalid.';
         };
@@ -148,10 +159,19 @@
     })(Rule);
 
     $.fn.jbValidate = function (e) {
-        var $input = $(this);
-        new RequiredTextRule($input).validate();
-        new RequiredCheckBoxRule($input).validate();
-        new PatternRule($input).validate();
+        var $input = $(this),
+            $formGroup = $input.closest('.form-group'),
+            invalid = false;
+
+        invalid = (new RequiredTextRule($input).validate() ? invalid : true);
+        invalid = (new RequiredCheckBoxRule($input).validate() ? invalid : true);
+        invalid = (new PatternRule($input).validate() ? invalid : true);
+
+        if (invalid) {
+            $formGroup.addClass('has-error');
+        } else {
+            $formGroup.removeClass('has-error');
+        }
     };
 
     $.fn.jBootValidator = function (options) {
