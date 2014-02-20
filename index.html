@@ -102,7 +102,7 @@
     </div>
 </div>
 <script>
-    var callback = function (e) {
+    var callback = function (form, e) {
         e.preventDefault();
         if ($('form').find('.form-group.has-error').length > 0) {
             $('#error').show();
@@ -111,6 +111,7 @@
             $('#error').hide();
             $('#victory').show();
         }
+        return false;
     };
     $('form').jBootValidator({validateOnSubmit: true, validationCallback: callback});
 </script>
