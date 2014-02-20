@@ -178,10 +178,11 @@
         var opts = $.extend({}, $.fn.jBootValidator.defaults, options);
         if (opts.validationCallback) {
             this.submit(function (e) {
+                var form = $(this);
                 if (opts.validateOnSubmit) {
                     $(this).find('input, select').each($.fn.jbValidate);
                 }
-                opts.validationCallback(e);
+                opts.validationCallback(form, e);
             });
         }
 
