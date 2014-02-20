@@ -141,11 +141,11 @@
         }
 
         PatternRule.prototype.shouldValidate = function () {
-            return !this.isBlank() && this.input.attr('pattern');
+            return this.input.attr('pattern');
         };
 
         PatternRule.prototype.isInvalid = function () {
-            return !new RegExp(this.pattern).test(this.val);
+            return !this.isBlank() && !new RegExp(this.pattern).test(this.val);
         };
 
         PatternRule.prototype.failureClass = function () {
