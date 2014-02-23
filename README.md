@@ -1,4 +1,4 @@
-##JBootValidator (WIP)
+##JBootValidator
 
 A fallback option that uses the html 5 required and pattern attributes to do validation when the browser doesn't support these features.
 
