@@ -8,9 +8,9 @@ A fallback option that uses the html 5 required and pattern attributes to do val
 
 Validate a single input.
 
-     <input type="text" required pattern="\\d+"/>
+     <input id="myInput" type="text" required pattern="\\d+"/>
 
-     $('#inputId').validate();
+     $('#myInput').validate();
 
 Validate all inputs of a form each time that the element is focused on or changed.
 
@@ -25,7 +25,7 @@ With all parameters defined.
         }
     });
 
-Options:
+###Options:
 
 Name | Default | Description
 -----|---------|-----------------------
