@@ -1,12 +1,36 @@
 ##JBootValidator (WIP)
 
-IE 8 and 9 make me sad. They don't support either the "required" or "pattern" attributes that help make client side form validation easier.
-
-I'm going to throw this together as a quick fall-back for when I can't let the browser do it's job.
+A fallback option that uses the html 5 required and pattern attributes to do validation when the browser doesn't support these features.
 
 [Demo](http://benkiefer.github.io/jbootvalidator)
 
-###Todo
- - add test coverage for submit logic to make sure that both inputs and selects are validated
- - fix select box so that it is in a separate rule.
- - add test coverage for when required is removed from and added to an input after jbootvalidator has been initialized.
+###Usage
+
+Validate a single input.
+
+     <input type="text" required pattern="\\d+"/>
+
+     $('#inputId').validate();
+
+Validate all inputs of a form each time that the element is focused on or changed.
+
+    $('formSelector').jBootValidator();
+
+With all parameters defined.
+
+    $('formSelector').jBootValidator({
+        validateOnSubmit : true,
+        validationCallback : function (form, e) {
+            console.log('invoked');
+        }
+    });
+
+Options:
+
+Name | Default | Description
+-----|---------|-----------------------
+validateOnSubmit | false | should all inputs be validated before submitting the form?
+validationCallback | undefined | function which should be invoked after submitting a form. Callback is invoked with form and event object.
+
+
+
