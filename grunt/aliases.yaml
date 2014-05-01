@@ -4,3 +4,6 @@ default:
     - 'karma:continuous'
     - 'uglify'
     - 'copy'
+	
+release:
+	- 'release'
