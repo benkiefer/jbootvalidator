@@ -2,8 +2,8 @@ module.exports = function (grunt) {
     return {
         release: {
             options: {
-			bump: false, //default: true
-			file: 'component.json', //default: package.json
+			bump: false, 
+			file: 'bower.json', 
 			npm: false, 
 			npmtag: false, 
 			github: { 
