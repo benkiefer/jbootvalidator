@@ -1,7 +1,5 @@
 {
   "name": "jBootValidator",
-  "version": "1.0.1-SNAPSHOT",
-  "description": "jquery bootstrap validation plugin",
   "keywords": [
     "jquery",
     "bootstrap",
