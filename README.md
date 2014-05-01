@@ -20,7 +20,7 @@ With all parameters defined.
 
     $('formSelector').jBootValidator({
         validateOnSubmit : true,
-        validationCallback : function (form, e) {
+        callback : function (form, e) {
             console.log('invoked');
         }
     });
@@ -30,7 +30,7 @@ With all parameters defined.
 Name | Default | Description
 -----|---------|-----------------------
 validateOnSubmit | false | should all inputs be validated before submitting the form?
-validationCallback | undefined | function which should be invoked after submitting a form. Callback is invoked with form and event object.
+callback | no-op | function which should be invoked after submitting a form. Callback is invoked with form and event object.
 
 
 

@@ -28,7 +28,7 @@ define(['jBootValidator', 'sinon'], function (JBootValidator, Sinon) {
             form.append(formGroup)
                 .jBootValidator({
                     validateOnSubmit: true,
-                    validationCallback: submitCallBack
+                    callback: submitCallBack
                 });
 
             form.submit();
@@ -55,7 +55,7 @@ define(['jBootValidator', 'sinon'], function (JBootValidator, Sinon) {
 
             form.append(formGroup)
                 .jBootValidator({
-                    validationCallback: submitCallBack
+                    callback: submitCallBack
                 });
 
             form.submit();

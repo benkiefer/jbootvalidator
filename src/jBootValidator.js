@@ -176,13 +176,13 @@
 
     $.fn.jBootValidator = function (options) {
         var opts = $.extend({}, $.fn.jBootValidator.defaults, options);
-        if (opts.validationCallback) {
+        if (opts.callback) {
             this.submit(function (e) {
                 var form = $(this);
                 if (opts.validateOnSubmit) {
                     $(this).find('input, select').each($.fn.jbValidate);
                 }
-                opts.validationCallback(form, e);
+                opts.callback(form, e);
             });
         }
 
@@ -192,7 +192,7 @@
 
     $.fn.jBootValidator.defaults = {
         validateOnSubmit: false,
-        validationCallback: undefined
+        callback: function(form, e){}
     };
 
 }(jQuery));
