@@ -1,0 +1,15 @@
+{
+  "name": "jBootValidator",
+  "version": "1.0.1",
+  "homepage": "https://github.com/benkiefer/jbootvalidator",
+  "authors": [
+    "Ben Kiefer <kieferfam@msn.com>"
+  ],
+  "description": "jquery and bootstrap input validation",
+  "keywords": [
+    "jquery",
+    "bootstrap",
+    "validation"
+  ],
+  "license": "BSD"
+}
