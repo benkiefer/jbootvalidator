@@ -32,6 +32,5 @@
     "grunt-karma": "~0.6.2",
     "grunt-contrib-jshint": "~0.8.0",
     "load-grunt-config": "~0.7.1",
-    "grunt-release": "~0.7.0"
   }
 }
