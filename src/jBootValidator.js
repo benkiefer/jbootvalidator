@@ -187,7 +187,7 @@
         }
 
         return this.attr('novalidate', 'novalidate')
-            .find('select, input').bind('keyup focus change', $.debounce($.fn.jbValidate, 300)).blur($.fn.jbValidate);
+            .find('select, input, textarea').bind('keyup focus change', $.debounce($.fn.jbValidate, 300)).blur($.fn.jbValidate);
     };
 
     $.fn.jBootValidator.defaults = {
