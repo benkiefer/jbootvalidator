@@ -141,7 +141,7 @@
         }
 
         PatternRule.prototype.shouldValidate = function () {
-            return this.input.attr('pattern');
+            return this.input.attr('pattern') && this.input.is('input');
         };
 
         PatternRule.prototype.isInvalid = function () {

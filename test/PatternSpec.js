@@ -69,6 +69,20 @@ define(['jBootValidator', 'sinon'], function (jBootValidator, Sinon) {
             expect($span.text()).toBe('my title');
         });
 
+        it('should not add help-block after form control text area because it doesnt support the pattern attr', function () {
+            var formControl = formControlTextArea('\\d+', 'my title').val('b');
+            var formGroup = formGroupDiv()
+                .append(formControl);
+
+            form.append(formGroup)
+                .jBootValidator();
+
+            formControl.trigger('keyup');
+            this.clock.tick(301);
+
+            expect(formGroup.find('span.help-block.jb-input-pattern').length).toBe(0);
+        });
+
         it('should add help-block with default message when pattern doesnt match and no title attribute', function () {
             var formControl = formControlInput('\\d+').val('b');
             var formGroup = formGroupDiv()
@@ -226,6 +240,14 @@ define(['jBootValidator', 'sinon'], function (jBootValidator, Sinon) {
                 $input.attr('title', title);
             }
             return $input;
+        }
+
+        function formControlTextArea(pattern, title) {
+            var $textarea = $('<textarea>').addClass('form-control').attr('pattern', pattern);
+            if (title) {
+                $textarea.attr('title', title);
+            }
+            return $textarea;
         }
 
         function helpBlockSpan() {
