@@ -11,6 +11,7 @@ define(['jBootValidator', 'sinon'], function (JBootValidator, Sinon) {
 
         it('should fire callback on submit and validate when both are true', function () {
             var input = formControlInput(),
+                textarea = formControlTextArea(),
                 select = formControlSelect(),
                 invoked = false;
 
@@ -23,7 +24,8 @@ define(['jBootValidator', 'sinon'], function (JBootValidator, Sinon) {
 
             var formGroup = formGroupDiv()
                 .append(input)
-                .append(select);
+                .append(select)
+                .append(textarea);
 
             form.append(formGroup)
                 .jBootValidator({
@@ -34,12 +36,13 @@ define(['jBootValidator', 'sinon'], function (JBootValidator, Sinon) {
             form.submit();
 
             expect(invoked).toBe(true);
-            expect(this.jbValStub.callCount).toBe(2);
+            expect(this.jbValStub.callCount).toBe(3);
         });
 
         it('should not validate if submit validate is false (default) but still call callback', function () {
             var input = formControlInput(),
                 select = formControlSelect(),
+                textArea = formControlTextArea(),
                 invoked = false;
 
             function submitCallBack(formObject, e) {
@@ -51,6 +54,7 @@ define(['jBootValidator', 'sinon'], function (JBootValidator, Sinon) {
 
             var formGroup = formGroupDiv()
                 .append(input)
+                .append(textArea)
                 .append(select);
 
             form.append(formGroup)
@@ -70,6 +74,10 @@ define(['jBootValidator', 'sinon'], function (JBootValidator, Sinon) {
 
         function formControlInput() {
             return $('<input>').addClass('form-control').attr('type', 'text');
+        }
+
+        function formControlTextArea() {
+            return $('<textarea>').addClass('form-control');
         }
 
         function formControlSelect() {

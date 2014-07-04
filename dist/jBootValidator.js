@@ -180,7 +180,7 @@
             this.submit(function (e) {
                 var form = $(this);
                 if (opts.validateOnSubmit) {
-                    $(this).find('input, select').each($.fn.jbValidate);
+                    $(this).find('input, select, textarea').each($.fn.jbValidate);
                 }
                 opts.callback(form, e);
             });
