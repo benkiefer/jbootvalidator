@@ -180,14 +180,14 @@
             this.submit(function (e) {
                 var form = $(this);
                 if (opts.validateOnSubmit) {
-                    $(this).find('input, select').each($.fn.jbValidate);
+                    $(this).find('input, select, textarea').each($.fn.jbValidate);
                 }
                 opts.callback(form, e);
             });
         }
 
         return this.attr('novalidate', 'novalidate')
-            .find('select, input').bind('keyup focus change', $.debounce($.fn.jbValidate, 300)).blur($.fn.jbValidate);
+            .find('select, input, textarea').bind('keyup focus change', $.debounce($.fn.jbValidate, 300)).blur($.fn.jbValidate);
     };
 
     $.fn.jBootValidator.defaults = {
