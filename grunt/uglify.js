@@ -1,7 +1,7 @@
 module.exports = function (grunt) {
     return {
         options: {
-            banner: '/*! <%= package.name %> - v<%= package.version %> - ' +
+            banner: '/*! <%= package.name %> - v<%= bower.version %> - ' +
                 '<%= package.repository.url %> */'
         },
         javascript: {
